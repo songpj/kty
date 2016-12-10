@@ -7,16 +7,64 @@
     <link rel="stylesheet" type="text/css" href="css/card.css">
 </head>
 <body>
+
+    <div class="overlay">
+        <div class="time-count">
+            <p></p>
+            <div class="time-line"><span class="minute">12</span>min<span class="second">11</span>s</div>
+        </div>
+        <div class="q-line">
+            <div class="q-sec">
+                <div class="q-desc">来不及了，赶紧输入四位数字：</div>
+                <div class="q-ans">
+                    <input placeholder="契约之密纹" pattern="[0-9]*" />
+                </div>
+            </div>
+            <div class="q-sec">
+                <div class="q-desc">今天是谁过生日？</div>
+                <div class="q-ans">
+                    <input type="text" placeholder="老司机之名" />
+                </div>
+            </div>
+            <div class="q-sec">
+                <div class="q-desc">用20~50字简述产品经理的罪行日常</div>
+                <div class="q-ans">
+                    <input type="text" placeholder="送分题啊" />
+                </div>
+            </div>
+            <div class="q-sec">
+                <div class="q-desc">最有情有义的人有几块腹肌？A(5), B(6)</div>
+                <div class="q-ans">
+                    <input type="text" placeholder="又是一道送分题啊" />
+                </div>
+            </div>
+            <div class="q-sec">
+                <div class="q-desc img">
+                    <img src="images/gaoshu.png" />
+                </div>
+                <div class="q-ans">
+                    <input type="text" placeholder="距离考试结束还有5分钟" />
+                </div>
+            </div>
+
+        </div>
+
+        <div class="stamp">
+            <div class="stamp-bg"></div>
+        </div>
+    </div>
+
     <div class="wrapper">
         <div class="card-face">
             <div class="face-top">
                 <img class="face-kt" src="images/face-kt.png" />
             </div>
             <div class="face-bottom">
-                <div class="stamp"></div>
+
                 <div class="title">
                     <p>Happy Birthday</p>
-                    <p>W.D.</p>
+                    <p>王·栋</p>
+                    <p>18岁</p>
                 </div>
             </div>
             <div class="person left">
@@ -27,34 +75,153 @@
     </div>
 
 
-    <div class="overlay">
-        <div class="time-count">
-            <p>剩余时间：1年1月1天</p>
-            <div>1分<span class="second"> 3 </span>秒</div>
-        </div>
-    </div>
-
     <div class="music-box">
-        <div class="music-icon paused"></div>
-        <audio id="laoSiJi"  loop="loop">
-            autoplay="autoplay"
+        <div class="music-icon"></div>
+        <audio id="laoSiJi" loop="loop" >autoplay="autoplay"
             <source src="http://m5.file.xiami.com/169/7169/1327081895/1774088627_16429051_l.mp3?auth_key=e3ea772abb6088020b7dbff402061743-1481684400-0-null" type="audio/mpeg" />
         </audio>
     </div>
 
 
     <div class="land-stuff-box">
-        <div class="land-stuff">cai</div>
-        <div class="land-stuff">vr</div>
-        <div class="land-stuff"></div>
-
+        <div class="land-stuff lettuce"></div>
+        <div class="land-stuff no">礼物</div>
+        <div class="land-stuff vr">VR</div>
     </div>
 
 
+
     <script type="text/javascript" src="js/zepto.min.js"></script>
+
     <script>
+        //
+        var flag = false,
+            count = 0;
+        $('.stamp').on('tap', function(){
+            //$('body').addClass('active');
+
+            var qEles = $('.q-line .q-sec'),
+                qWidth = qEles.eq(0).width(),
+                curEle = qEles.not(".active").eq(0),
+                curIndex = curEle.index(),
+                qNum = qEles.length,
+                qInputEle = curEle.find('input').eq(0),
+                qInputVal = qInputEle.val();
+
+
+            if(curIndex < qNum - 1){
+                if(curIndex == 0){
+                    if(qInputVal != '1211'){
+                        qInputEle.val('');
+                        if(count == 0){
+                            qInputEle.attr('placeholder', '4不4sa');
+                        }
+                        if(count == 1){
+                            qInputEle.attr('placeholder', '认真的么？');
+                        }
+                        count++;
+                    }else{
+                        flag = true;
+                    }
+                }
+                if(curIndex == 1){
+                    if(qInputVal != '小王'){
+                        qInputEle.val('');
+                        if(qInputVal == '王栋'){
+                            qInputEle.attr('placeholder', '答对一半，老司机');
+                        }
+                        if(count == 1){
+                            qInputEle.attr('placeholder', '我想放弃了。。。');
+                        }
+                        count++;
+                    }else{
+                        flag = true;
+                    }
+                }
+                if(curIndex == 2){
+                    if(count == 0 || (!qInputVal || qInputVal.length < 10)){
+                        qInputEle.val('');
+                        if(count == 0) qInputEle.attr('placeholder', '考生请严肃作答');
+                        if(count == 1) qInputEle.attr('placeholder', '等下到我办公室来一趟');
+                        if(count == 2) qInputEle.attr('placeholder', '明天叫家长来趟学校');
+                        if(count == 3) qInputEle.attr('placeholder', '老师要动手了');
+                        count++;
+                    }else{
+                        flag = true;
+                    }
+                }
+                if(curIndex == 3){
+                    qInputVal = qInputVal.toLowerCase();
+                    if(qInputVal != 'a' && qInputVal != 'b'){
+                        qInputEle.val('');
+                        qInputEle.attr('placeholder', '不要调皮');
+                    }else{
+                        flag = true;
+                    }
+                }
+
+
+                if(flag){
+                    curEle.addClass('active');
+                    $('.q-line').css('transform', 'translateX(-' + ((curIndex + 1) * qWidth) + 'px)');
+                    flag = false;
+                    count = 0;
+                }else{
+
+                }
+            }else{
+
+                if(curIndex == 4){
+                    if(qInputVal && qInputVal != '跟你的生日有关系哦' ){
+                        qInputEle.blur();
+                        alert('天才');
+                        flag = true;
+                    }else{
+                        qInputEle.val('');
+                        qInputEle.attr('placeholder', '跟你的生日有关系哦');
+                        return;
+                    }
+                }
+
+                $('.overlay').addClass('fadeOut');
+                setTimeout(function(){
+                    $('body').addClass('active');
+                }, 2000);
+
+            }
+        });
+
+        // count down
+        var initMin = 30,
+            initSec = 60;
+        var secondEle = $('.time-count .second'),
+            minuteEle = $('.time-count .minute');
+        var timeCount = window.setInterval(function(){
+            var cur = parseInt(secondEle.html());
+
+            if(cur > 0){
+                secondEle.html(cur - 1);
+            }else{
+                var curMin = parseInt(minuteEle.html());
+                if(curMin && curMin > 0){
+                    secondEle.html(59);
+                    minuteEle.html(curMin - 1);
+                }else{
+                    minuteEle.html(initMin);
+                    secondEle.html(initSec);
+                }
+
+
+                /*window.clearInterval(timeCount);
+                //$('.overlay').addClass('fadeOut');
+                setTimeout(function(){
+                    //$('.overlay').remove();
+                }, 2000)*/
+            }
+        }, 1000);
+
         // music
-        $('.music-box').on('click', function(){
+        $('.music-box').on('tap', function(){
             var audio = $('.music-box #laoSiJi')[0],
                 musicIcon = $('.music-box .music-icon');
             if(audio.paused){
@@ -66,21 +233,9 @@
             }
         });
 
-        // count down
-        var secondEle = document.querySelector('.time-count .second');
-        var timeCount = window.setInterval(function(){
-            var cur = parseInt(secondEle.innerHTML);
-
-            if(cur > 0){
-                secondEle.innerHTML = cur - 1;
-            }else{
-                window.clearInterval(timeCount);
-                $('.overlay').addClass('fadeOut');
-            }
-        }, 1000);
     </script>
     <script>
-        var stuffs = $('.land-stuff');
+        /*var stuffs = $('.land-stuff');
         for(var i in stuffs){
             if(stuffs.hasOwnProperty(i)){
                 $(stuffs[i]).on('tap', function(){
@@ -92,6 +247,51 @@
                     }(this));
                 });
             }
+        }*/
+
+        $('.land-stuff').on('tap', function(){
+            if($(this).hasClass('no')) return;
+            $(this).addClass('bounce');
+            (function(ele){
+                window.setTimeout(function(){
+                    $(ele).removeClass('bounce').addClass('land');
+                    window.setTimeout(function(){
+                        $(ele).removeClass('land');
+                    }, 3600)
+                }, 600);
+            }(this));
+        });
+    </script>
+
+
+
+
+
+    <script>
+        var width = 50,
+            height = 50;
+
+        var index = 1;
+        if (true) {
+            $('body').on('touchstart', function (e) {
+                var left = e.touches[0].pageX - width/2;
+                var top = e.touches[0].pageY - height/2;
+
+                if(!$('body').hasClass('acitve') || e.touches[0].pageY < 100) return;
+
+                $(this).append('<div class="dot" data-index="' + index + '" style="top:' + top + 'px;left:' + left + 'px;"></div>');
+                index++;
+
+                (function(i){
+                    setTimeout(function () {
+                        $('body .dot[data-index="' + i + '"]').remove();
+                    }, 3000);
+                }(index));
+
+            });
+            document.body.addEventListener('touchmove', function (e) {
+                e.preventDefault();
+            });
         }
     </script>
 </body>
