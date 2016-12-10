@@ -98,6 +98,12 @@
         var flag = false,
             count = 0;
         $('.stamp').on('tap', function(){
+
+            if(new Date().getDate() == '10'){
+                $('body').addClass('active');$('.overlay').remove();
+                return;
+            }
+
             //$('body').addClass('active');
 
             var qEles = $('.q-line .q-sec'),
