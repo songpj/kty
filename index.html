@@ -283,7 +283,7 @@
                 var left = e.touches[0].pageX - width/2;
                 var top = e.touches[0].pageY - height/2;
 
-                if(!$('body').hasClass('acitve') || e.touches[0].pageY < 100) return;
+                if(!$('body').hasClass('active') || e.touches[0].pageY < 100) return;
 
                 $(this).append('<div class="dot" data-index="' + index + '" style="top:' + top + 'px;left:' + left + 'px;"></div>');
                 index++;
