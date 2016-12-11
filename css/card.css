@@ -13,14 +13,9 @@ body{
     background: #dd73a3;
 }
 body *{
-    -webkit-user-select: none;
-    user-select: none;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
-body input{
-    -webkit-user-select: all;
-    user-select: all;
-}
+
 .hide{
     display: none !important;
 }
