@@ -123,7 +123,13 @@
                             qInputEle.attr('placeholder', '4不4sa');
                         }
                         if(count == 1){
-                            qInputEle.attr('placeholder', '认真的么？');
+                            qInputEle.attr('placeholder', '以后不要再过生日为难自己了');
+                        }
+                        if(count == 2){
+                            qInputEle.attr('placeholder', '(→_→) 程序即将自毁');
+                        }
+                        if(count > 2){
+                            qInputEle.attr('placeholder', '沉默中。。。');
                         }
                         count++;
                     }else{
@@ -134,23 +140,29 @@
                     if(qInputVal != '小王'){
                         qInputEle.val('');
                         if(qInputVal == '王栋'){
-                            qInputEle.attr('placeholder', '答对一半，老司机');
+                            qInputEle.attr('placeholder', '接近了，老司机');
+                        }else{
+                            if(count == 1){
+                                qInputEle.attr('placeholder', '正在重新考虑新司机人选');
+                            }
+                            if(count > 1){
+                                qInputEle.attr('placeholder', '我想放弃了。。。');
+                            }
                         }
-                        if(count == 1){
-                            qInputEle.attr('placeholder', '我想放弃了。。。');
-                        }
+
                         count++;
                     }else{
                         flag = true;
                     }
                 }
                 if(curIndex == 2){
-                    if(count == 0 || (!qInputVal || qInputVal.length < 10)){
+                    if(count == 0 || (!qInputVal || qInputVal.length < 20)){
                         qInputEle.val('');
-                        if(count == 0) qInputEle.attr('placeholder', '考生请严肃作答');
+                        if(count == 0) qInputEle.attr('placeholder', '罄竹难书，考生请严肃作答');
                         if(count == 1) qInputEle.attr('placeholder', '等下到我办公室来一趟');
                         if(count == 2) qInputEle.attr('placeholder', '明天叫家长来趟学校');
                         if(count == 3) qInputEle.attr('placeholder', '老师要动手了');
+                        if(count > 3) qInputEle.attr('placeholder', 'pia pia pia');
                         count++;
                     }else{
                         flag = true;
